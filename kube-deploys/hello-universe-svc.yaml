@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-universe
+  namespace: hello-universe
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    targetPort: pythonport
+    port: 80
+  selector:
+    name: hello-universe
