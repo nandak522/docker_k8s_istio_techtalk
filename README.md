@@ -50,3 +50,8 @@ curl http://localhost:$(kubectl -n hello-universe get svc \
     -o jsonpath='{.items[0].spec.ports[0].nodePort}')/
 ```
 This should serve `v2` of service roughly 99% of time, leaving the rest to `v1`.
+
+---
+### Gotchas regarding Weights
+* Never have subset weights as `100` and `0` as this configuration gets rejected right away by Istio. Have `99` and `1` instead.
+* If you are done with `99` and `1` weights and want to totally route, drop the `1`'s destination and update `99`'s weight to `100`.
